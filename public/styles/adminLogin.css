@@ -1,0 +1,100 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #06beb6, #48b1bf, #1f4037);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+}
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.container {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 35px;
+  width: 100%;
+  max-width: 380px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  color: #fff;
+}
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 24px;
+  font-weight: 600;
+}
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.input-wrapper {
+  position: relative;
+  margin-bottom: 18px;
+}
+input {
+  width: 100%;
+  padding: 12px 40px 12px 12px; /* space for eye icon */
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  font-size: 14px;
+  color: #333;
+}
+input::placeholder {
+  color: #888;
+}
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+  fill: #555;
+}
+button {
+  width: 100%;
+  padding: 12px;
+  background: #fff;
+  color: #333;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover {
+  background: #333;
+  color: #fff;
+}
+.back-link {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 14px;
+}
+.back-link a {
+  color: #fff;
+  text-decoration: underline;
+  font-weight: 600;
+}
