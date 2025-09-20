@@ -1,0 +1,92 @@
+<link rel="stylesheet" href="/styles/adminDashboard.css">
+<div class="container">
+    <input type="text" id="message" value="{{{message}}}" name="message" hidden>
+    <div class="top-bar">
+        <h1>Admin Dashboard</h1>
+        <form action="/admin/logout" method="POST" style="display:inline;">
+            <button type="submit" class="btn">Logout</button>
+        </form>
+    </div>
+    <p>Welcome, {{adminName}}</p>
+
+    <div class="top-bar">
+        <h2>Registered Users</h2>
+        <button class="btn" onclick="openModal('addUserModal')">+ Add User</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each users}}
+            <tr>
+                <td>{{inc @index}}</td>
+                <td>{{this.username}}</td>
+                <td>{{this.email}}</td>
+                <td>
+                    <button class="btn" onclick="openModal('editModal-{{this._id}}')">Edit</button>
+                    <button class="btn" onclick="openModal('deleteModal-{{this._id}}')">Delete</button>
+                </td>
+            </tr>
+
+            <!-- Edit Modal -->
+            <div id="editModal-{{this._id}}" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('editModal-{{this._id}}')">&times;</span>
+                    <h3>Edit User</h3>
+                    <form action="/admin/edit-user/{{this._id}}" method="POST">
+                        <label>Username</label>
+                        <div class="input-wrapper"><input type="text" name="username" value="{{this.username}}"
+                                required></div>
+                        <label>Email</label>
+                        <div class="input-wrapper"><input type="email" name="email" value="{{this.email}}" required>
+                        </div>
+                        <button type="submit" class="btn">Update</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Delete Modal -->
+            <div id="deleteModal-{{this._id}}" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('deleteModal-{{this._id}}')">&times;</span>
+                    <h3>Delete User</h3>
+                    <p>Are you sure you want to delete <b>{{this.username}}</b>?</p>
+                    <form action="/admin/delete-user/{{this._id}}" method="POST">
+                        <button type="submit" class="btn">Yes, Delete</button>
+                        <button type="button" class="btn"
+                            onclick="closeModal('deleteModal-{{this._id}}')">Cancel</button>
+                    </form>
+                </div>
+            </div>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+<!-- Add User Modal -->
+<div id="addUserModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('addUserModal')">&times;</span>
+        <h3>Add New User</h3>
+        <form action="/admin/add-user" method="POST" id="add-user">
+            <label>Username</label>
+            <div class="input-wrapper"><input type="text" name="username" id="username"></div>
+            <label>Email</label>
+            <div class="input-wrapper"><input type="email" name="email" id="email"></div>
+            <label>Password</label>
+            <div class="input-wrapper"><input type="password" name="password" id="password"></div>
+            <label>Confirm Password</label>
+            <div class="input-wrapper"><input type="password" name="confirmPassword" id="confirmPassword"></div>
+            <button type="submit" class="btn">Add User</button>
+        </form>
+    </div>
+</div>
+
+<script src="/js/adminDashboard.js"></script>
