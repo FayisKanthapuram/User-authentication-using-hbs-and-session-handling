@@ -27,7 +27,7 @@ const login = async (req, res) => {
         title: "Admin Login Page",
       });
 
-    req.session.admin = admin.username;
+    req.session.user = {username:admin.username,role:'admin'};
     req.session.login = admin.username;
     res.redirect("/admin/dashboard");
   } catch (error) {
@@ -56,7 +56,7 @@ const laodDashboard = async (req, res) => {
     }
 
     res.render("admin/dashboard", {
-      adminName: req.session.admin,
+      adminName: req.session.user.username,
       title: "Admin Dashboard",
       users: users,
       message: message,
@@ -73,7 +73,7 @@ const laodDashboard = async (req, res) => {
 };
 
 const logout = (req, res) => {
-  req.session.admin = null;
+  req.session.user.role=null;
   res.redirect("/admin/login");
 };
 

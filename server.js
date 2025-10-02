@@ -2,10 +2,10 @@ import express from "express";
 import dotenv from "dotenv";
 import userRoutes from "./routes/user.js";
 import adminRoutes from "./routes/admin.js";
+import commonRoutes from "./routes/common.js"
 import connectDB from "./db/connectDB.js";
 import session from "express-session";
 import nocache from "nocache";
-import auth from "./middleware/auth.js";
 import hbs from "hbs";   // <--- import hbs
 
 dotenv.config();
@@ -41,12 +41,10 @@ app.use(nocache());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get("/", auth.isLogin, (req, res) => {
-  res.render("home", { title: "Home page" });
-});
 
 app.use("/user", userRoutes);
 app.use("/admin", adminRoutes);
+app.use('/',commonRoutes);
 
 connectDB();
 app.listen(PORT, () => {

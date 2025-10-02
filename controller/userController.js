@@ -40,16 +40,16 @@ const login = async (req, res) => {
     if (!isMatch)
       return res.render("user/login", { message: "Incorrect Password" ,title:"User Login"});
     
-    req.session.user=user.username;
+    req.session.user={username:user.username,role:'user'};
 
-    res.render("user/home", { message: "Login Successfully" ,user:user.username,title:"User Dashboard"});
+    res.render("user/home", { message: "Login Successfully" ,user:req.session.user.username,title:"User Dashboard"});
   } catch (error) {
     res.render("user/login", { message: "something went wrong" ,title:"User Login"});
   }
 };
 
 const logout=(req,res)=>{
-  req.session.user=null;
+  req.session.user.role=null;
   res.redirect('/user/login');
 }
 
@@ -62,7 +62,7 @@ const loadLogin = (req, res) => {
 };
 
 const loadHome = (req, res) => {
-  res.render('user/home',{user:req.session.user,title:"User Dashboard"});
+  res.render('user/home',{user:req.session.user.username,title:"User Dashboard"});
 };
 
 export default { registerUser, loadLogin, loadRegister, login,loadHome ,logout};
