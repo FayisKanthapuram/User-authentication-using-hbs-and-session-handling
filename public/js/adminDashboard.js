@@ -10,18 +10,18 @@ window.onclick = function (event) {
   }
 };
 const message = document.getElementById("message").value;
-if(message==="User already exist"){
-  Swal.fire ({
+if (message === "User already exist") {
+  Swal.fire({
     icon: "error",
     title: "Error!",
     text: message,
     confirmButtonColor: "#ff2c2c", // Sets a custom red color
   });
-}else if(message){
+} else if (message) {
   Swal.fire({
     title: message,
     icon: "success",
-    draggable: true
+    draggable: true,
   });
 }
 
@@ -65,16 +65,24 @@ function formValidate(e) {
   return true;
 }
 
-function searchUser()
-{
-    const text=document.getElementById('userSearch').value;
-    const filter=text.toLowerCase();
-    
-    const rows=document.querySelectorAll('#userTable tbody tr');
+function searchUser() {
+  const filter = document.getElementById('userSearch').value.trim().toLowerCase();
+  const rows = document.querySelectorAll('#userTable tbody tr');
+  let index = 1; // start index from 1
 
-    rows.forEach((row)=>{
-        const rowText=row.innerText.toLowerCase();
+  rows.forEach(row => {
+    const usernameCell = row.querySelector('td:nth-child(2)');
+    const username = usernameCell ? usernameCell.textContent.trim().toLowerCase() : '';
 
-        row.style.display= rowText.includes(filter) ? "" : "none";
-    });
+    const passwordCell = row.querySelector('td:nth-child(3)');
+    const password = passwordCell ? passwordCell.textContent.trim().toLowerCase() : '';
+
+    if (username.startsWith(filter) || password.startsWith(filter)) {
+      row.style.display = 'table-row';
+      row.querySelector('td:nth-child(1)').textContent = index; // update index column
+      index++;
+    } else {
+      row.style.display = 'none';
+    }
+  });
 }
