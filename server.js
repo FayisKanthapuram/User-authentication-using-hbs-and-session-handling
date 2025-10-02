@@ -2,11 +2,13 @@ import express from "express";
 import dotenv from "dotenv";
 import userRoutes from "./routes/user.js";
 import adminRoutes from "./routes/admin.js";
-import commonRoutes from "./routes/common.js"
+import commonRoutes from "./routes/common.js";
 import connectDB from "./db/connectDB.js";
 import session from "express-session";
 import nocache from "nocache";
-import hbs from "hbs";   // <--- import hbs
+import path from "path";
+const __dirname = path.resolve();
+import hbs from "hbs";
 
 dotenv.config();
 const app = express();
@@ -41,10 +43,12 @@ app.use(nocache());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
 app.use("/user", userRoutes);
 app.use("/admin", adminRoutes);
-app.use('/',commonRoutes);
+app.use("/", commonRoutes);
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, "public", "html", "404.html"));
+});
 
 connectDB();
 app.listen(PORT, () => {

@@ -3,7 +3,7 @@ const loadHome=(req,res)=>{
 }
 
 const load404=(req,res)=>{
-    res.render('common/404',{page:req.params.id})
+    res.render('common/404')
 }
 
 export default {loadHome,load404};

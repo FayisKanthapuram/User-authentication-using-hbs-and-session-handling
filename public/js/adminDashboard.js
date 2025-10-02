@@ -28,6 +28,8 @@ if(message==="User already exist"){
 document.addEventListener("DOMContentLoaded", function () {
   //DOMContentLoaded ensures that all HTML elements are fully loaded before we try to access them
   document.getElementById("add-user").addEventListener("submit", formValidate);
+
+  searchUser();
 });
 
 function formValidate(e) {
@@ -61,4 +63,18 @@ function formValidate(e) {
   }
   e.target.submit(); //If validation passes → e.target.submit(); manually submits the form.
   return true;
+}
+
+function searchUser()
+{
+    const text=document.getElementById('userSearch').value;
+    const filter=text.toLowerCase();
+    
+    const rows=document.querySelectorAll('#userTable tbody tr');
+
+    rows.forEach((row)=>{
+        const rowText=row.innerText.toLowerCase();
+
+        row.style.display= rowText.includes(filter) ? "" : "none";
+    });
 }

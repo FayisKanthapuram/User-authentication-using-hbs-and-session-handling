@@ -45,6 +45,25 @@ h2 {
   align-items: center;
   margin-bottom: 20px;
 }
+
+/* NEW: Search Bar Styles */
+.search-bar {
+  margin-bottom: 20px;
+}
+#userSearch {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+}
+#userSearch::placeholder {
+    color: #888;
+}
+/* END NEW: Search Bar Styles */
+
 .btn {
   padding: 8px 14px;
   background: #fff;

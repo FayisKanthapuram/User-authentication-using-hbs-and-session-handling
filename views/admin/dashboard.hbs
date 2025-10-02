@@ -14,7 +14,10 @@
         <button class="btn" onclick="openModal('addUserModal')">+ Add User</button>
     </div>
 
-    <table>
+    <div class="search-bar">
+        <input type="text" id="userSearch" placeholder="Search users..." onkeyup="searchUser()">
+    </div>
+    <table id="userTable">
         <thead>
             <tr>
                 <th>#</th>
@@ -35,7 +38,6 @@
                 </td>
             </tr>
 
-            <!-- Edit Modal -->
             <div id="editModal-{{this._id}}" class="modal">
                 <div class="modal-content">
                     <span class="close" onclick="closeModal('editModal-{{this._id}}')">&times;</span>
@@ -52,7 +54,6 @@
                 </div>
             </div>
 
-            <!-- Delete Modal -->
             <div id="deleteModal-{{this._id}}" class="modal">
                 <div class="modal-content">
                     <span class="close" onclick="closeModal('deleteModal-{{this._id}}')">&times;</span>
@@ -70,7 +71,6 @@
     </table>
 </div>
 
-<!-- Add User Modal -->
 <div id="addUserModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal('addUserModal')">&times;</span>
