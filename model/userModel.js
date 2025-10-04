@@ -13,6 +13,10 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  isBlock:{
+    type:Boolean,
+    default:false
+  }
 });
 
 export default mongoose.model('user',userSchema);

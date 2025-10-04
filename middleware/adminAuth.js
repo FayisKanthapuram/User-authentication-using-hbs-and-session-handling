@@ -13,7 +13,7 @@ const isLogin = (req, res, next) => {
   }
 };
 
-function isAdmin(req,res,next)
+function isUser(req,res,next)
 {
     if (req.session?.user?.role === "user") {
         return res.status(403).render('common/accessDenied',{title:"Denied Access"})
@@ -21,4 +21,4 @@ function isAdmin(req,res,next)
     next();
 }
 
-export default { checkSession, isLogin ,isAdmin};
+export default { checkSession, isLogin ,isUser};

@@ -35,6 +35,11 @@
                 <td>
                     <button class="btn" onclick="openModal('editModal-{{this._id}}')">Edit</button>
                     <button class="btn" onclick="openModal('deleteModal-{{this._id}}')">Delete</button>
+                    <form action="/admin/toggle-block/{{this._id}}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-block">
+                            {{#if this.isBlock}}Unblock{{else}}Block{{/if}}
+                        </button>
+                    </form>
                 </td>
             </tr>
 

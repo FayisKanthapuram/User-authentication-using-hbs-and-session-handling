@@ -27,7 +27,7 @@ const login = async (req, res) => {
         title: "Admin Login Page",
       });
 
-    req.session.user = {username:admin.username,role:'admin'};
+    req.session.user = { username: admin.username, role: "admin" };
     req.session.login = admin.username;
     res.redirect("/admin/dashboard");
   } catch (error) {
@@ -73,7 +73,7 @@ const laodDashboard = async (req, res) => {
 };
 
 const logout = (req, res) => {
-  req.session.user.role=null;
+  req.session.user.role = null;
   res.redirect("/admin/login");
 };
 
@@ -124,10 +124,23 @@ const addUser = async (req, res) => {
       username,
       password: hashedPassword,
     });
-
     await newUser.save();
 
+
     req.session.addUser = username;
+    
+    res.redirect("/admin/dashboard");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const blockUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await userSchema.findOne({ _id: id });
+    user.isBlock = !user.isBlock;
+    await user.save();
     res.redirect("/admin/dashboard");
   } catch (error) {
     console.log(error);
@@ -142,4 +155,5 @@ export default {
   editUser,
   deleteUser,
   addUser,
+  blockUser,
 };

@@ -3,11 +3,11 @@ import userController from "../controller/userController.js";
 import auth from "../middleware/auth.js";
 const router = Router();
 
-router.get(["/","/login"],auth.isUser,auth.isLogin, userController.loadLogin);
+router.get(["/","/login"],auth.isAdmin,auth.isLogin, userController.loadLogin);
 router.post('/login',userController.login);
-router.get("/register",auth.isUser,auth.isLogin, userController.loadRegister);
+router.get("/register",auth.isAdmin,auth.isLogin, userController.loadRegister);
 router.post("/register", userController.registerUser);
 router.get("/home",auth.checkSession,userController.loadHome)
-router.post('/logout',auth.isUser,auth.checkSession,userController.logout);
+router.post('/logout',auth.isAdmin,auth.checkSession,userController.logout);
 
 export default router;

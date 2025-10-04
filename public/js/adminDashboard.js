@@ -74,10 +74,10 @@ function searchUser() {
     const usernameCell = row.querySelector('td:nth-child(2)');
     const username = usernameCell ? usernameCell.textContent.trim().toLowerCase() : '';
 
-    const passwordCell = row.querySelector('td:nth-child(3)');
-    const password = passwordCell ? passwordCell.textContent.trim().toLowerCase() : '';
+    const emailCell = row.querySelector('td:nth-child(3)');
+    const email = emailCell ? emailCell.textContent.trim().toLowerCase() : '';
 
-    if (username.startsWith(filter) || password.startsWith(filter)) {
+    if (username.startsWith(filter) || email.startsWith(filter)) {
       row.style.display = 'table-row';
       row.querySelector('td:nth-child(1)').textContent = index; // update index column
       index++;

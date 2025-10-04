@@ -7,6 +7,7 @@ import connectDB from "./db/connectDB.js";
 import session from "express-session";
 import nocache from "nocache";
 import path from "path";
+import flash from "connect-flash";
 const __dirname = path.resolve();
 import hbs from "hbs";
 
@@ -37,6 +38,16 @@ app.use(
     },
   })
 );
+
+// Flash middleware
+app.use(flash());
+
+// Middleware to make flash messages available in views
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  next();
+});
 
 app.use(nocache());
 
